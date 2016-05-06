@@ -30,25 +30,24 @@ public class ZaprSDK extends AppCompatActivity {
         mShowVideoAdButton = (Button) findViewById(R.id.showVideoAdButton);
 
         // Set log level in Zapr Ad SDK (Optional. Default log level is error)
-        Log.setLogLevel(Log.LOG_LEVEL.verbose);
+        // Note: Logging should be disabled in production
+        Log.setLogLevel(Log.LOG_LEVEL.debug);
 
         // Initialize Banner Ad
         mBannerAd = (ZaprBannerAd) findViewById(R.id.zaprAdView);
         if (mBannerAd != null) {
-            mBannerAd.setAdUnitId("abcd1234banner"); // Add your Ad Unit ID here
+            mBannerAd.setAdUnitId("<ad-unit-id>"); // TODO: Add your Ad Unit ID here
             mBannerAd.setBannerAdEventListener(mBannerAdEventListener);
-            mBannerAd.setUserInfo(new UserInfo(1980, "M"));
+            mBannerAd.setUserInfo(new UserInfo(1990, "M")); // Add user information
         }
 
         // Initialize Video Ad
         mVideoAd = new ZaprVideoAd(mContext);
         mVideoAd.setZaprVideoAdEventListener(mVideoAdEventListener);
-        mVideoAd.setAdUnitId("abcd1234video"); // Add your Ad Unit ID here
-        mVideoAd.setBlockSkippableAds(true);
+        mVideoAd.setAdUnitId("<ad-unit-id>"); // TODO: Add your Ad Unit ID here
         mVideoAd.setMaxDuration(300);
-        mVideoAd.setMinDuration(30);
-        mVideoAd.setUserInfo(new UserInfo(1980, "M"));
-
+        mVideoAd.setMinDuration(5);
+        mVideoAd.setUserInfo(new UserInfo(1990, "F")); // Add user information
     }
 
     @Override
@@ -69,6 +68,9 @@ public class ZaprSDK extends AppCompatActivity {
     }
 
 
+    /**
+     * Zapr Banner Ad Event Listener to get common Banner ad lifecycle callbacks
+     */
     private ZaprBannerAdEventListener mBannerAdEventListener = new ZaprBannerAdEventListener() {
         @Override
         public void onBannerAdLoaded() {
@@ -83,9 +85,16 @@ public class ZaprSDK extends AppCompatActivity {
         @Override
         public void onFailedToLoadBannerAd(int errorCode, String errorMessage) {
             showToast("Error Code: " + errorCode + "\nError: " + errorMessage);
+            /*
+             *You can take required actions here like hiding Banner ad view if necessary.
+             * mBannerAd.setVisibility(View.GONE);
+             */
         }
     };
 
+    /**
+     * Zapr Video Ad Event Listener to get common Video ad lifecycle callbacks
+     */
     private ZaprVideoAdEventListener mVideoAdEventListener = new ZaprVideoAdEventListener() {
         @Override
         public void onVideoAdError(int errorCode, String errorMessage) {
@@ -94,7 +103,7 @@ public class ZaprSDK extends AppCompatActivity {
         }
 
         @Override
-        public void onAdReady(VideoAdResponse videoAdResponse) {
+        public void onAdReady(VideoAdResponse videoAdResponse, String vastXml) {
             mShowVideoAdButton.setEnabled(true);
             showToast("Video Ad is ready to play");
         }

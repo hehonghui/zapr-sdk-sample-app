@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Zapr SDK Sample App</string>
+    <string name="load_banner_ad">Load Banner Ad</string>
+    <string name="load_video_ad">Load Video Ad</string>
+    <string name="show_video_ad">Show Video Ad</string>
+    <string name="start_data_sdk">Start Data SDK</string>
 </resources>

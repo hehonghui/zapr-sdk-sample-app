@@ -2,20 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.redbricklane.zapr.demo">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/zapr_logo"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ZaprSDK"
@@ -26,52 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.nexage.sourcekit.vast.activity.VASTActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-        <service
-            android:name="com.redbricklane.zaprSdkBase.services.zaprProcess.Ariel"
-            android:enabled="true"
-            android:process=":zapr_process" />
-        <service
-            android:name="com.redbricklane.zaprSdkBase.services.zaprProcess.UpdateArielSettingsService"
-            android:enabled="true"
-            android:process=":zapr_process" />
-        <service
-            android:name="com.redbricklane.zaprSdkBase.services.appProcess.ZaprCredentialsService"
-            android:enabled="true" />
-        <service
-            android:name="com.redbricklane.zaprSdkBase.services.appProcess.LocationService"
-            android:enabled="true" />
-        <service
-            android:name="com.redbricklane.zaprSdkBase.services.appProcess.UpdateDetailsService"
-            android:enabled="true" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <receiver android:name="com.redbricklane.zaprSdkBase.broadcastReceivers.implicit.StartServiceReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.redbricklane.zaprSdkBase.broadcastReceivers.explicit.RegisterServerReceiver">
-            <intent-filter>
-                <action android:name="REGISTER_BR" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.redbricklane.zaprSdkBase.broadcastReceivers.explicit.PriorityReceiver">
-            <intent-filter>
-                <action android:name="com.redbricklane.zaprSdkBase.PRIORITY_ACTION" />
-
-                <category android:name="com.example.servicetest" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

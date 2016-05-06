@@ -23,6 +23,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile('com.redbricklane.zapr:zapr-sdk:1.3@aar') {transitive = true;}
+
+    // Zapr SDK dependency
+    compile('com.redbricklane.zapr:zapr-sdk:1.6@aar') {transitive = true;}
+    // Required by Zapr SDK
     compile 'com.google.android.gms:play-services:8.4.0'
 }
