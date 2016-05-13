@@ -36,7 +36,8 @@ public class ZaprSDK extends AppCompatActivity {
         // Initialize Banner Ad
         mBannerAd = (ZaprBannerAd) findViewById(R.id.zaprAdView);
         if (mBannerAd != null) {
-            mBannerAd.setAdUnitId("<ad-unit-id>"); // TODO: Add your Ad Unit ID here
+            // NOTE: This is test ad unit id. You should NOT use this id in your app
+            mBannerAd.setAdUnitId("9d4cd9fc-91e4-4b10-9a0d-92ad872a3894");
             mBannerAd.setBannerAdEventListener(mBannerAdEventListener);
             mBannerAd.setUserInfo(new UserInfo(1990, "M")); // Add user information
         }
@@ -44,7 +45,8 @@ public class ZaprSDK extends AppCompatActivity {
         // Initialize Video Ad
         mVideoAd = new ZaprVideoAd(mContext);
         mVideoAd.setZaprVideoAdEventListener(mVideoAdEventListener);
-        mVideoAd.setAdUnitId("<ad-unit-id>"); // TODO: Add your Ad Unit ID here
+        // NOTE: This is test ad unit id. You should NOT use this id in your app
+        mVideoAd.setAdUnitId("b39b63f5-87a8-4390-8216-12a4fb713427");
         mVideoAd.setMaxDuration(300);
         mVideoAd.setMinDuration(5);
         mVideoAd.setUserInfo(new UserInfo(1990, "F")); // Add user information
