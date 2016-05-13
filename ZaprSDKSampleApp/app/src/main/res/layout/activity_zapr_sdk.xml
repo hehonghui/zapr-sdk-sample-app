@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222222"
+    tools:context="com.redbricklane.zapr.demo.ZaprSDK">
+
+    <com.redbricklane.zapr.bannersdk.ZaprBannerAd
+        android:id="@+id/zaprAdView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadAdButtonClicked"
+        android:text="@string/load_banner_ad" />
+
+    <LinearLayout
+        android:id="@+id/videoAdButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="loadVideoAdButtonClicked"
+            android:text="@string/load_video_ad" />
+
+        <Button
+            android:id="@+id/showVideoAdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:enabled="false"
+            android:onClick="showVideoAdButtonClicked"
+            android:text="@string/show_video_ad" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/dataSdkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoAdButtonContainer"
+        android:layout_centerHorizontal="true"
+        android:onClick="startDataSdkButtonClicked"
+        android:text="@string/start_data_sdk" />
+
+</RelativeLayout>
