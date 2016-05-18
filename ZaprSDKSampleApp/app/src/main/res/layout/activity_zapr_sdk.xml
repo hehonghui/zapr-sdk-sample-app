@@ -47,11 +47,38 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/interstitialAdButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoAdButtonContainer"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/loadInterstitial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="loadInterstitialAdButtonClicked"
+            android:text="@string/load_interstitial" />
+
+        <Button
+            android:id="@+id/showInterstitial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:enabled="false"
+            android:onClick="showInterstitialAdButtonClicked"
+            android:text="@string/show_interstitial" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/dataSdkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/videoAdButtonContainer"
+        android:layout_below="@+id/interstitialAdButtonContainer"
         android:layout_centerHorizontal="true"
         android:onClick="startDataSdkButtonClicked"
         android:text="@string/start_data_sdk" />

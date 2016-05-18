@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.redbricklane.zapr.bannersdk.ZaprBannerAd;
 import com.redbricklane.zapr.bannersdk.ZaprBannerAdEventListener;
+import com.redbricklane.zapr.bannersdk.ZaprInterstitialAd;
+import com.redbricklane.zapr.bannersdk.ZaprInterstitialAdEventListener;
 import com.redbricklane.zapr.basesdk.Log;
 import com.redbricklane.zapr.basesdk.model.UserInfo;
 import com.redbricklane.zapr.videosdk.ZaprVideoAd;
@@ -20,14 +22,17 @@ public class ZaprSDK extends AppCompatActivity {
 
     private Context mContext = this;
     private Button mShowVideoAdButton;
+    private Button mShowInterstitialButton;
     private ZaprBannerAd mBannerAd;
     private ZaprVideoAd mVideoAd;
+    private ZaprInterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zapr_sdk);
         mShowVideoAdButton = (Button) findViewById(R.id.showVideoAdButton);
+        mShowInterstitialButton = (Button) findViewById(R.id.showInterstitial);
 
         // Set log level in Zapr Ad SDK (Optional. Default log level is error)
         // Note: Logging should be disabled in production
@@ -38,8 +43,14 @@ public class ZaprSDK extends AppCompatActivity {
         if (mBannerAd != null) {
             // NOTE: This is test ad unit id. You should NOT use this id in your app
             mBannerAd.setAdUnitId("9d4cd9fc-91e4-4b10-9a0d-92ad872a3894");
+            // Set listener for Banner ad events
             mBannerAd.setBannerAdEventListener(mBannerAdEventListener);
-            mBannerAd.setUserInfo(new UserInfo(1990, "M")); // Add user information
+            // Add user information
+            mBannerAd.setUserInfo(new UserInfo(1990, "M"));
+            // Ad Auto reload after every 30 sec
+            mBannerAd.setAdRefreshTime(30);
+            // Auto retry ad request if some error happens
+            mBannerAd.enableAutoRetryOnError(true);
         }
 
         // Initialize Video Ad
@@ -47,9 +58,21 @@ public class ZaprSDK extends AppCompatActivity {
         mVideoAd.setZaprVideoAdEventListener(mVideoAdEventListener);
         // NOTE: This is test ad unit id. You should NOT use this id in your app
         mVideoAd.setAdUnitId("b39b63f5-87a8-4390-8216-12a4fb713427");
+        // Set optional video ad parameters in request
         mVideoAd.setMaxDuration(300);
         mVideoAd.setMinDuration(5);
-        mVideoAd.setUserInfo(new UserInfo(1990, "F")); // Add user information
+        // Add user information
+        mVideoAd.setUserInfo(new UserInfo(1991, "F"));
+
+        // Initialize Interstitial Ad
+        mInterstitialAd = new ZaprInterstitialAd(mContext);
+        // Set listener
+        mInterstitialAd.setInterstitialAdEventListener(mInterstitialAdEventListener);
+        // NOTE: This is test ad unit id. You should NOT use this id in your app
+        mInterstitialAd.setAdUnitId("c548b3db-593e-4222-9684-cbd72f0832eb");
+        // Add user information
+        mInterstitialAd.setUserInfo(new UserInfo(1992, "M"));
+
     }
 
     @Override
@@ -61,14 +84,10 @@ public class ZaprSDK extends AppCompatActivity {
         if (mVideoAd != null) {
             mVideoAd.destroy();
         }
-    }
-
-    public void loadAdButtonClicked(View view) {
-        if (mBannerAd != null) {
-            mBannerAd.loadAd();
+        if (mInterstitialAd != null) {
+            mInterstitialAd.destroy();
         }
     }
-
 
     /**
      * Zapr Banner Ad Event Listener to get common Banner ad lifecycle callbacks
@@ -128,12 +147,54 @@ public class ZaprSDK extends AppCompatActivity {
         @Override
         public void onVideoPlayerClosed() {
             // Video ad player is closed
+            mShowVideoAdButton.setEnabled(false);
         }
 
     };
 
+    /**
+     * Zapr Interstitial Ad Event Listener to get common Interstitial ad lifecycle callbacks
+     */
+    private ZaprInterstitialAdEventListener mInterstitialAdEventListener = new ZaprInterstitialAdEventListener() {
+        @Override
+        public void onInterstitialAdLoaded() {
+            mShowInterstitialButton.setEnabled(true);
+            showToast("Interstitial Ad is ready to be displayed");
+        }
+
+        @Override
+        public void onInterstitialAdShown() {
+            // interstitial ad is displayed on screen
+        }
+
+        @Override
+        public void onInterstitialAdClicked() {
+            showToast("Interstitial Ad is clicked");
+        }
+
+        @Override
+        public void onInterstitialAdClosed() {
+            mShowInterstitialButton.setEnabled(false);
+        }
+
+        @Override
+        public void onFailedToLoadInterstitialAd(int errorCode, String errorMessage) {
+            mShowInterstitialButton.setEnabled(false);
+            showToast("ErrorCode: " + errorCode + "\nError: " + errorMessage);
+        }
+    };
+
+    // Utility method to show toast
     private void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    // Button click callbacks
+
+    public void loadAdButtonClicked(View view) {
+        if (mBannerAd != null) {
+            mBannerAd.loadAd();
+        }
     }
 
     public void loadVideoAdButtonClicked(View view) {
@@ -145,8 +206,16 @@ public class ZaprSDK extends AppCompatActivity {
         mVideoAd.showVideoAd();
     }
 
+    public void loadInterstitialAdButtonClicked(View view) {
+        mShowInterstitialButton.setEnabled(false);
+        mInterstitialAd.loadInterstitialAd();
+    }
+
+    public void showInterstitialAdButtonClicked(View view) {
+        mInterstitialAd.showInterstitialAd();
+    }
+
     public void startDataSdkButtonClicked(View view) {
         Zapr.start(mContext);
     }
-
 }
