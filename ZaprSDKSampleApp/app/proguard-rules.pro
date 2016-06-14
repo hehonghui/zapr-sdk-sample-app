@@ -15,3 +15,13 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep class org.nexage.sourcekit.** {
+  public protected private *;
+}
+-keep class javax.xml.xpath.** {
+  public protected private *;
+}
+-keep class org.w3c.dom.** {
+  public protected private *;
+}
