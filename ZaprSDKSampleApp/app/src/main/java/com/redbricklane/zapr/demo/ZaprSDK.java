@@ -59,8 +59,8 @@ public class ZaprSDK extends AppCompatActivity {
         // NOTE: This is test ad unit id. You should NOT use this id in your app
         mVideoAd.setAdUnitId("b39b63f5-87a8-4390-8216-12a4fb713427");
         // Set optional video ad parameters in request
-        mVideoAd.setMaxDuration(300);
-        mVideoAd.setMinDuration(5);
+        mVideoAd.setMaxDuration(300); // Optional
+        mVideoAd.setMinDuration(5); // Optional
         // Add user information
         mVideoAd.setUserInfo(new UserInfo(1991, "F"));
 
