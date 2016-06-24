@@ -218,7 +218,7 @@ public class ZaprSDK extends AppCompatActivity {
     public void startDataSdkButtonClicked(View view) {
         // Optional
         // Enable policy dialog with your Privacy Policy link url
-        Zapr.enablePolicyDialogWithPolicyLink("http://www.zapr.in/");
+        Zapr.enablePolicyDialogWithPolicyLink("http://zapr.in/privacy/");
 
         // Optional
         // Enable policy dialog with Policy message
