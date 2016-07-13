@@ -9,7 +9,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 4
-        versionName "1.9.3"
+        versionName "1.9.5"
     }
     buildTypes {
         release {
@@ -25,7 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
 
     // Zapr SDK dependency
-    compile('com.redbricklane.zapr:zapr-sdk:1.9.3@aar') {transitive = true;}
+    compile('com.redbricklane.zapr:zapr-sdk:1.9.5@aar') {transitive = true;}
     // Required by Zapr SDK
     compile 'com.google.android.gms:play-services:9.0.2'
 }
