@@ -229,6 +229,11 @@ public class ZaprSDK extends AppCompatActivity {
 
         // Note: If policy dialog is enabled, then Zapr service will only start after getting acceptance from user.
 
+        // Optional
+        // Uncomment to disable Runtime permission check and permission request for Android M+ devices.
+        // Note: Disable permission check only if you are explicitly requesting required permissions in your app.
+        // Zapr.setRequestForPermissionsEnabled(false);
+
         // Start Zapr service
         Zapr.start(mContext);
     }
