@@ -49,6 +49,7 @@ public class ZaprSDK extends AppCompatActivity {
             mBannerAd.setAdRefreshTime(30);
             // Auto retry ad request if some error happens
             mBannerAd.enableAutoRetryOnError(true);
+
             // Add user information (optional)
             // Note: Add user info only if you have correct info. Else do not add any user info.
             mBannerAd.setUserInfo(new UserInfo(1990, "M"));
@@ -62,6 +63,7 @@ public class ZaprSDK extends AppCompatActivity {
         // Set optional video ad parameters in request
         mVideoAd.setMaxDuration(300); // Optional
         mVideoAd.setMinDuration(5); // Optional
+
         // Add user information (optional)
         // Note: Add user info only if you have correct info. Else do not add any user info.
         mVideoAd.setUserInfo(new UserInfo(1991, "F"));
@@ -72,9 +74,13 @@ public class ZaprSDK extends AppCompatActivity {
         mInterstitialAd.setInterstitialAdEventListener(mInterstitialAdEventListener);
         // NOTE: This is test ad unit id. You should NOT use this id in your app
         mInterstitialAd.setAdUnitId("c548b3db-593e-4222-9684-cbd72f0832eb");
+
         // Add user information (optional)
         // Note: Add user info only if you have correct info. Else do not add any user info.
         mInterstitialAd.setUserInfo(new UserInfo(1992, "M"));
+
+        // Optional: Change background color of interstitial ad
+        mInterstitialAd.setInterstitialAdBackgroundColor(0xCC111111);
 
     }
 
