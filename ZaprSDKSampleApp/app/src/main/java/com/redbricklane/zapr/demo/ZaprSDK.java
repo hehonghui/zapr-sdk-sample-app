@@ -133,7 +133,13 @@ public class ZaprSDK extends AppCompatActivity {
         }
 
         @Override
+        public void onResponseReceived(VideoAdResponse videoAdResponse) {
+            // Ad response received
+        }
+
+        @Override
         public void onAdReady(VideoAdResponse videoAdResponse, String vastXml) {
+            // Video ad is ready to play
             mShowVideoAdButton.setEnabled(true);
             showToast("Video Ad is ready to play");
         }
