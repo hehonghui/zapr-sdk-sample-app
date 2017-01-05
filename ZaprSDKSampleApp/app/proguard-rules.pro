@@ -16,6 +16,10 @@
 #   public *;
 #}
 
+-keep class com.redbricklane.zaprSdkBase.jni.** {
+  public protected private *;
+}
+
 -keep class org.nexage.sourcekit.** {
   public protected private *;
 }
