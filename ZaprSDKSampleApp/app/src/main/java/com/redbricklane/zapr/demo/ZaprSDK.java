@@ -134,7 +134,8 @@ public class ZaprSDK extends AppCompatActivity {
 
         @Override
         public void onResponseReceived(VideoAdResponse videoAdResponse) {
-            // Ad response received
+            // Ad response received.
+            // No action required here unless you are using video ad cache hold functionality
         }
 
         @Override

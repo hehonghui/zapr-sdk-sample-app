@@ -16,7 +16,7 @@
 #   public *;
 #}
 
--keep class com.redbricklane.zaprSdkBase.jni.** {
+-keep class com.redbricklane.zaprSdkBase.** {
   public protected private *;
 }
 
