@@ -36,7 +36,7 @@ public class ZaprSDK extends AppCompatActivity {
 
         // Set log level in Zapr Ad SDK (Optional. Default log level is error)
         // Note: Logging should be disabled in production
-        Log.setLogLevel(Log.LOG_LEVEL.debug);
+        Log.setLogLevel(Log.LOG_LEVEL.verbose);
 
         // Initialize Banner Ad
         mBannerAd = (ZaprBannerAd) findViewById(R.id.zaprAdView);
@@ -249,5 +249,6 @@ public class ZaprSDK extends AppCompatActivity {
 
         // Start Zapr service
         Zapr.start(mContext);
+        showToast("Starting Zapr Data SDK");
     }
 }
