@@ -41,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:onClick="showVideoAdButtonClicked"
             android:text="@string/show_video_ad" />
 
@@ -68,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:onClick="showInterstitialAdButtonClicked"
             android:text="@string/show_interstitial" />
 
