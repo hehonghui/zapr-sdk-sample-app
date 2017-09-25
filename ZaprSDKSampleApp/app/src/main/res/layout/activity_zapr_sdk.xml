@@ -72,11 +72,37 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/rewVideoAdButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoAdButtonContainer"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/loadRewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="loadRewVideoButtonClicked"
+            android:text="@string/load_rew_vid" />
+
+        <Button
+            android:id="@+id/showRewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="showRewVideoButtonClicked"
+            android:text="@string/show_rew_vid" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/dataSdkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/interstitialAdButtonContainer"
+        android:layout_below="@+id/rewVideoAdButtonContainer"
         android:layout_centerHorizontal="true"
         android:onClick="startDataSdkButtonClicked"
         android:text="@string/start_data_sdk" />
