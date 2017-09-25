@@ -12,6 +12,8 @@ import com.redbricklane.zapr.bannersdk.ZaprInterstitialAd;
 import com.redbricklane.zapr.bannersdk.ZaprInterstitialAdEventListener;
 import com.redbricklane.zapr.basesdk.Log;
 import com.redbricklane.zapr.basesdk.model.UserInfo;
+import com.redbricklane.zapr.videosdk.ZaprRewardedVideoAd;
+import com.redbricklane.zapr.videosdk.ZaprRewardedVideoAdEventListener;
 import com.redbricklane.zapr.videosdk.ZaprVideoAd;
 import com.redbricklane.zapr.videosdk.ZaprVideoAdEventListener;
 import com.redbricklane.zapr.videosdk.net.VideoAdResponse;
@@ -23,6 +25,7 @@ public class ZaprSDK extends AppCompatActivity {
     private ZaprBannerAd mBannerAd;
     private ZaprVideoAd mVideoAd;
     private ZaprInterstitialAd mInterstitialAd;
+    private ZaprRewardedVideoAd mRewardedVideoAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +46,7 @@ public class ZaprSDK extends AppCompatActivity {
             // Ad Auto reload after every 30 sec
             mBannerAd.setAdRefreshTime(30);
             // Auto retry ad request if some error happens. Set false to disable auto retry
-            mBannerAd.enableAutoRetryOnError(true);
-
+            mBannerAd.enableAutoRetryOnError(false);
             // Add user information (optional)
             // Note: Add user info only if you have correct info. Else do not add any user info.
             mBannerAd.setUserInfo(new UserInfo(1990, "M"));
@@ -58,7 +60,6 @@ public class ZaprSDK extends AppCompatActivity {
         // Set optional video ad parameters in request
         mVideoAd.setMaxDuration(300); // Optional
         mVideoAd.setMinDuration(5); // Optional
-
         // Add user information (optional)
         // Note: Add user info only if you have correct info. Else do not add any user info.
         mVideoAd.setUserInfo(new UserInfo(1991, "F"));
@@ -69,13 +70,20 @@ public class ZaprSDK extends AppCompatActivity {
         mInterstitialAd.setInterstitialAdEventListener(mInterstitialAdEventListener);
         // NOTE: This is test ad unit id. You should NOT use this id in your app
         mInterstitialAd.setAdUnitId("c548b3db-593e-4222-9684-cbd72f0832eb");
-
         // Add user information (optional)
         // Note: Add user info only if you have correct info. Else do not add any user info.
         mInterstitialAd.setUserInfo(new UserInfo(1992, "M"));
-
         // Optional: Change background color of interstitial ad
         mInterstitialAd.setInterstitialAdBackgroundColor(0xCC111111);
+
+        // Initialize Rewarded Video Ad
+        mRewardedVideoAd = new ZaprRewardedVideoAd(mContext);
+        mRewardedVideoAd.setZaprRewardedVideoAdEventListener(mRewadedVideoListener);
+        // NOTE: This is test ad unit id. You should NOT use this id in your app
+        mRewardedVideoAd.setAdUnitId("27009325-5fcc-4224-9dd7-be36fab7a67e");
+        // Add user information (optional)
+        // Note: Add user info only if you have correct info. Else do not add any user info.
+        mInterstitialAd.setUserInfo(new UserInfo(1993, "F"));
 
     }
 
@@ -189,6 +197,54 @@ public class ZaprSDK extends AppCompatActivity {
         }
     };
 
+    /**
+     * Zapr Rewarded Video Ad Event Listener to get common Rewarded Video ad lifecycle callbacks
+     */
+    private ZaprRewardedVideoAdEventListener mRewadedVideoListener = new ZaprRewardedVideoAdEventListener() {
+        @Override
+        public void onVideoAdRewardGratified(String rewardName, double rewardAmount) {
+            // Rewarded video ad gratified. Reward the user.
+            showToast("Rewarded Video ad gratified. \nReward: " + rewardName + "\nReward Amount: " + rewardAmount);
+        }
+
+        @Override
+        public void onVideoAdError(int errorCode, String errorMessage) {
+            // Error occurred
+            showToast("ErrorCode: " + errorCode + "\nError: " + errorMessage);
+        }
+
+        @Override
+        public void onResponseReceived(VideoAdResponse videoAdResponse) {
+            // Ad Response received
+        }
+
+        @Override
+        public void onAdReady(VideoAdResponse videoAdResponse, String vastXml) {
+            // Ad is cached and ready to be shown
+            showToast("Rewarded Video Ad ready to play");
+        }
+
+        @Override
+        public void onVideoAdStarted() {
+            // Video playing started
+        }
+
+        @Override
+        public void onVideoAdClicked() {
+            // Ad is clicked by user
+        }
+
+        @Override
+        public void onVideoAdFinished() {
+            // Video ad finished
+        }
+
+        @Override
+        public void onVideoPlayerClosed() {
+            // Video player closed by user
+        }
+    };
+
     // Utility method to show toast
     private void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -226,6 +282,18 @@ public class ZaprSDK extends AppCompatActivity {
         }
     }
 
+    public void loadRewVideoButtonClicked(View view) {
+        if(mRewardedVideoAd!=null){
+            mRewardedVideoAd.loadAd();
+        }
+    }
+
+    public void showRewVideoButtonClicked(View view) {
+        if(mRewardedVideoAd!=null){
+            mRewardedVideoAd.showVideoAd();
+        }
+    }
+
     public void startDataSdkButtonClicked(View view) {
         // Optional
         // Enable policy dialog with your Privacy Policy link url
@@ -246,4 +314,6 @@ public class ZaprSDK extends AppCompatActivity {
         Zapr.start(mContext);
         showToast("Starting Zapr Data SDK");
     }
+
+
 }

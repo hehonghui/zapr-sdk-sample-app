@@ -6,4 +6,6 @@
     <string name="start_data_sdk">Start Data SDK</string>
     <string name="load_interstitial">Load Interstitial</string>
     <string name="show_interstitial">Show Interstitial</string>
+    <string name="load_rew_vid">Load Rewarded Video</string>
+    <string name="show_rew_vid">Show Rewarded Video</string>
 </resources>
