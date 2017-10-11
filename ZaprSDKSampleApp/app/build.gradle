@@ -9,7 +9,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 24
         versionCode 11
-        versionName "2.1.1"
+        versionName "2.2.0"
 
         // Add NDK filter in apps build.gradle to add only required .so files in final APK.
         ndk {
@@ -31,7 +31,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
 
     // Zapr SDK dependency
-    compile('com.redbricklane.zapr:zapr-sdk:2.1.1@aar') { transitive = true; }
+    compile('com.redbricklane.zapr:zapr-sdk:2.2.0@aar') { transitive = true; }
 
     // Required by Zapr SDK
     compile 'com.google.android.gms:play-services-ads:9.8.0'
