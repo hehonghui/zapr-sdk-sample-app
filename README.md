@@ -1,1 +1,0 @@
-Zapr SDK Sample App
