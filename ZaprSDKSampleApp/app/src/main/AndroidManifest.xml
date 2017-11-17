@@ -7,6 +7,7 @@
         android:allowBackup="true"
         android:icon="@drawable/zapr_logo"
         android:label="@string/app_name"
+        android:name=".ZaprApp"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ZaprSDK"
@@ -17,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".BannerAdActivity" />
     </application>
 
 </manifest>

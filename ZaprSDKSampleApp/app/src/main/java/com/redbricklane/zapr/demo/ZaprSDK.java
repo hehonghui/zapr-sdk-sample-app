@@ -1,6 +1,7 @@
 package com.redbricklane.zapr.demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -253,9 +254,10 @@ public class ZaprSDK extends AppCompatActivity {
     // Button click callbacks
 
     public void loadAdButtonClicked(View view) {
-        if (mBannerAd != null) {
-            mBannerAd.loadAd();
-        }
+//        if (mBannerAd != null) {
+//            mBannerAd.loadAd();
+//        }
+        startActivity(new Intent(this, BannerAdActivity.class));
     }
 
     public void loadVideoAdButtonClicked(View view) {

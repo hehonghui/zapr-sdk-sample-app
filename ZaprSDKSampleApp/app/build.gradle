@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.redbricklane.zapr.demo"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 11
         versionName "2.2.1"
@@ -36,4 +36,8 @@ dependencies {
     // Required by Zapr SDK
     compile 'com.google.android.gms:play-services-ads:9.8.0'
     compile 'com.google.android.gms:play-services-location:9.8.0'
+
+    // leak canary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
